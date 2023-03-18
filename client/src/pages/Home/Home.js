@@ -8,20 +8,13 @@ import { isEmpty } from "lodash";
 import './Home.css';
 
 const Home = (props) => {
-    const user = useSelector((state) => { return state.user });
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const logoutHandler = (e) => {
         e.preventDefault();
-        dispatch(removeLoginUser());
+        // dispatch(removeLoginUser());
     }
-
-    useEffect(() => {
-        if (isEmpty(user)) {
-            return navigate('/');
-        }
-    }, [user]);
 
     return (
         <div>
