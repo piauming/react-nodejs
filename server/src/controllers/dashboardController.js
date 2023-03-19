@@ -1,5 +1,9 @@
+// const data = {
+//     dashboard: [{"count":123}],
+// }
+
 const data = {
-    dashboard: [{"count":123}],
+    dashboard: {"count":123},
 }
 
 /*
