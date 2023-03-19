@@ -4,8 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { removeLoginUser } from '../../redux/actions';
 import { isEmpty } from "lodash";
-
 import './Home.css';
+
+const NotificationLink = () => {
+    const notifications = useSelector((state) => { return state.notifications });
+
+    useEffect(()=>{
+        console.log("--> notifications", notifications);
+    },[notifications]);
+    
+
+    return (
+        <Link to="notifications">Notifications</Link>
+    );
+}
 
 const Home = (props) => {
     const navigate = useNavigate();
@@ -20,7 +32,7 @@ const Home = (props) => {
         <div>
             <nav className="home-nav">
                 <h1>Home</h1>
-                <Link to="notifications">Notifications</Link>
+                <NotificationLink />
                 <Link to="dashboard">Dashboard</Link>
                 <Link to={{}} onClick={logoutHandler} >Logout</Link>
             </nav>

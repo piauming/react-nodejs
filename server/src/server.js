@@ -1,5 +1,12 @@
 const express = require('express');
+// const http = require('http');
+// const socketIo = require('socket.io');
+
+// Set up the Express app and server
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+app.set('socketio', io);
 
 const credentials = require('./middleware/credentials');
 const path = require('path');
@@ -8,8 +15,6 @@ const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const verifyJWT = require('./middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
-
-// logger
 
 // Cross Origin Resource Sharing
 app.use(credentials);
@@ -27,14 +32,22 @@ app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
 
-// verify access-token before access apis
+// define the API endpoint for sending notifications
+app.use('/notify', require('./routes/api/notify'));
+
+// verify access-token before access api
 app.use(verifyJWT);
-app.use('/protected', require('./routes/api/protected'));
 app.use('/dashboard', require('./routes/api/dashboard'));
 
-// app.get('/', (req, res) => {
-//  res.send('Hello World')
-//  res.sendFile('views/index.html')
-// })
+// whenever someone connects this gets executed
+io.on('connection', (socket) => {
+    console.log('A user has connected');
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    socket.on('disconnect', function () {
+        console.log('A user has disconnected');
+    });
+});
+
+http.listen(PORT, function () {
+    console.log(`Server running on port ${PORT}`);
+});
