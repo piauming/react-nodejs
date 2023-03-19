@@ -28,7 +28,7 @@ const Dashboard = (props) => {
     return (
         <div>
             <div>Dashboard</div>
-            {data && <div>{data.count}</div>}
+            {data && <div>{data?.count}</div>}
         </div>
     );
 }

@@ -1,52 +1,42 @@
-const usersDB = {
-    users: require('../model/users.json'),
-    setUsers: function(data) { this.users = data }
-}
-
-const fsPromises = require('fs').promises;
-const path = require('path');
+const { User } = require('../models');
 const bcrypt = require('bcrypt');
 
 const handleNewUser = async (req, res) => {
     console.log(req);
-    const { user, pwd } = req.body;
-    
-    if (!user || !pwd) {
-        return res.status(400).json({ 'message': 'Username and password are required'});
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ 'message': 'email and password are required' });
     }
 
     // check for duplicate usernames in db
-    const duplicate = usersDB.users.find(person => person.username === user);
+    const duplicate = await User.findAll({
+        where: {
+            email: email
+        }
+    });
 
-    if (duplicate) {
+    if (duplicate?.length > 0) {
         return res.sendStatus(409); // Conflict
     }
 
     try {
         // encrypt the password
-        const hashedPwd = await bcrypt.hash(pwd, 10);
-        
-        // store the new user
-        const newUser = { 
-            'username': user, 
-            "roles": { "User": 2001 },
-            'password': hashedPwd 
+        const hashedPwd = await bcrypt.hash(password, 10);
+
+        const newUser = {
+            email: email,
+            password: hashedPwd
         }
-        usersDB.setUsers([...usersDB.users, newUser]);
-        await fsPromises.writeFile(
-            path.join(__dirname, '..', 'model', 'users.json'), 
-            JSON.stringify(usersDB.users)
-        );
-        
-        // return response
-        console.log(usersDB.users);
-        res.status(201).json({ 'success': `New user ${user} created!`});
+
+        const user = await User.create(newUser);
+        res.status(201).json({ 'success': `New user ${email} created!` });
 
     } catch (err) {
         res.status(500).json({ 'message': err.message })
     }
 }
 
-module.exports = { 
+module.exports = {
     handleNewUser
 };
