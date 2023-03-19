@@ -29,7 +29,7 @@ app.use('/logout', require('./routes/logout'));
 
 // verify access-token before access apis
 app.use(verifyJWT);
-
+app.use('/protected', require('./routes/api/protected'));
 app.use('/dashboard', require('./routes/api/dashboard'));
 
 // app.get('/', (req, res) => {
