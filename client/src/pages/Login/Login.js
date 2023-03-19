@@ -4,8 +4,8 @@ import { isEmpty } from "lodash";
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth'
 
-const username = 'piauming';
-const password = 'password';
+const email = 'super_admin@test.com';
+const password = 'Abcd123$';
 
 const Login = (props) => {
     const { setAuth } = useAuth();
@@ -15,8 +15,8 @@ const Login = (props) => {
         e.preventDefault();
 
         const input = {
-            user: username,
-            pwd: password
+            email: email,
+            password: password
         }
 
         const headers = {
@@ -28,7 +28,7 @@ const Login = (props) => {
             .then((response) => {
                 const accessToken = response?.data?.accessToken;
                 console.log("accessToken", accessToken);
-                setAuth({ username, password, accessToken });
+                setAuth({ email, password, accessToken });
                 navigate("/home", { replace: true });
 
             }, (error) => {
