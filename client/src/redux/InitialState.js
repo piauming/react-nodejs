@@ -1,5 +1,5 @@
 const initialState = {
-    user:{}
+    notifications:[]
 }
 
 export default initialState;

@@ -6,7 +6,10 @@ const handleRefreshToken = async (req, res) => {
     // Get the refresh-token in cookie
     const cookies = req.cookies;
     
+    console.log("server handleRefreshToken....", cookies.jwt);
+
     if (!cookies?.jwt) {
+        console.log(".... no jwt?");
         console.log(401);
         return res.sendStatus(401);
     }
