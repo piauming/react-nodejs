@@ -27,8 +27,8 @@ const Login = (props) => {
         axios.post('/auth', JSON.stringify(input), headers)
             .then((response) => {
                 const accessToken = response?.data?.accessToken;
-                console.log("accessToken", accessToken);
-                setAuth({ email, password, accessToken });
+                // setAuth({ email, password, accessToken });
+                setAuth({ email, accessToken });
                 navigate("/home", { replace: true });
 
             }, (error) => {

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addMessage } from "../../redux/actions";
 import { Home, Dashboard, Test, Notifications, Login } from '../../pages';
-import { AppLayout, HomeLayout } from '../../components';
+import { AppLayout, HomeLayout, ProtectedRoute } from '../../components';
 import './App.css';
 
 import io from 'socket.io-client';
@@ -11,9 +13,10 @@ socket.on("connect_error", (err) => {
 });
 
 const App = () => {
+    const dispatch = useDispatch();
     useEffect(() => {
         socket.on('notification', (data) => {
-            console.log("notification with data!!! ", data);
+            dispatch(addMessage(data));
         });
     }, []);
 
@@ -21,7 +24,8 @@ const App = () => {
         <Routes>
             <Route path="/" element={<AppLayout />}>
                 <Route index element={<Login />} />
-                <Route path="home" element={<HomeLayout />}>
+                <Route path="login" element={<Login />} />
+                <Route path="home" element={<ProtectedRoute><HomeLayout /></ProtectedRoute>}>
                     <Route path="main" element={<Home />}>
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="test" element={<Test />} />

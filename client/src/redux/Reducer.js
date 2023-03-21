@@ -1,13 +1,11 @@
 import initialState from "./InitialState";
-import { setLoginUser, removeLoginUser } from "./reducers";
+import { addMessage } from "./reducers";
 
 // reducer function
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case "setLoginUser":
-            return setLoginUser(state, action.payload);
-        case "removeLoginUser":
-            return removeLoginUser(state, action.payload);
+        case "addMessage":
+            return addMessage(state, action.payload);
         default:
             return state;
     }
