@@ -1,6 +1,5 @@
+require("dotenv").config();
 const express = require('express');
-// const http = require('http');
-// const socketIo = require('socket.io');
 
 // Set up the Express app and server
 const app = express();
@@ -10,7 +9,7 @@ app.set('socketio', io);
 
 const credentials = require('./middleware/credentials');
 const path = require('path');
-const PORT = 7789;
+const PORT = process.env.PORT;
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const verifyJWT = require('./middleware/verifyJWT');

@@ -1,5 +1,5 @@
 const initialState = {
-    notifications:[]
+    messages:[]
 }
 
 export default initialState;

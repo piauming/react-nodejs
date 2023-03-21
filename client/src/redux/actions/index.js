@@ -1,2 +1,1 @@
-export { default as setLoginUser } from './SetLoginUser';
-export { default as removeLoginUser } from './RemoveLoginUser';
+export { default as addMessage } from './AddMessage';

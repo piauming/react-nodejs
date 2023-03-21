@@ -6,10 +6,7 @@ const handleRefreshToken = async (req, res) => {
     // Get the refresh-token in cookie
     const cookies = req.cookies;
     
-    console.log("server handleRefreshToken....", cookies.jwt);
-
     if (!cookies?.jwt) {
-        console.log(".... no jwt?");
         console.log(401);
         return res.sendStatus(401);
     }
@@ -47,7 +44,7 @@ const handleRefreshToken = async (req, res) => {
                 { expiresIn: '30s' }
             );
 
-            // if the refresh-token is valid, retuen a new access-token
+            // if the refresh-token is valid, return a new access-token
             res.json({ accessToken })
         }
     )

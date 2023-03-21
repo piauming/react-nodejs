@@ -1,11 +1,10 @@
-const data = {
-    dashboard: { "count": 123 },
-}
+const { Energy } = require('../models');
 
 const getAllDashboards = async (req, res) => {
-    res.json(data.dashboard);
+  const result = await Energy.findAll();
+  res.json(result);
 }
 
 module.exports = {
-    getAllDashboards,
+  getAllDashboards,
 }
