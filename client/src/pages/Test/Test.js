@@ -1,11 +1,11 @@
 import React from "react";
 
-const Notifications = (props) => {
-    return(
+function Test() {
+    return (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-            Notifications
+            Test
         </div>
     );
 }
 
-export default Notifications;
+export default Test;

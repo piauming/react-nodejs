@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { Login, Home, Dashboard, Notifications, Missing } from '../../pages';
-import { Layout, PrivateRoute } from "../../components";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Home, Dashboard, Test, Notifications, Login } from '../../pages';
+import { AppLayout, HomeLayout } from '../../components';
 import './App.css';
+
 import io from 'socket.io-client';
-
 const socket = io("http://localhost:7789");
-
 socket.on("connect_error", (err) => {
-  console.log(`connect_error due to ${err.message}`);
+    console.log(`connect_error due to ${err.message}`);
 });
 
 const App = () => {
@@ -18,25 +17,17 @@ const App = () => {
         });
     }, []);
 
-
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
-                {/* public routes */}
-                <Route path="/" element={<Login />} />
-                <Route path="/login" element={<Login />} />
-
-                {/* protected routes */}
-                <Route exact path='/' element={<PrivateRoute />}>
-                    <Route path="/home" element={<Home />}>
-                        <Route index element={<Dashboard />} />
-                        <Route path="notifications" element={<Notifications />} />
+            <Route path="/" element={<AppLayout />}>
+                <Route index element={<Login />} />
+                <Route path="home" element={<HomeLayout />}>
+                    <Route path="main" element={<Home />}>
                         <Route path="dashboard" element={<Dashboard />} />
+                        <Route path="test" element={<Test />} />
                     </Route>
+                    <Route path="notifications" element={<Notifications />} />
                 </Route>
-
-
-                <Route path="*" element={<Missing />} />
             </Route>
         </Routes>
     );

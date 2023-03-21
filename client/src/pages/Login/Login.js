@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { isEmpty } from "lodash";
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth'
@@ -33,14 +33,12 @@ const Login = (props) => {
 
             }, (error) => {
                 console.log(error);
-                setSuccess(false);
             });
     }
 
-    return (
-        <div>
-            <p>Login</p>
-            <div onClick={loginHandler}>Submit</div>
+    return(
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%'}}>
+            <Link to={{ }} onClick={loginHandler}>Login</Link>
         </div>
     );
 }

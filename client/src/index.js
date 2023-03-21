@@ -5,6 +5,7 @@ import { App } from './components';
 import { Provider } from 'react-redux';
 import store from './redux/Store'
 import { AuthProvider } from './context/AuthProvider';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
