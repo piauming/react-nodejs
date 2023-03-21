@@ -1,22 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import { isEmpty } from "lodash";
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth'
+import './Login.css';
 
-const email = 'super_admin@test.com';
-const password = 'Abcd123$';
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+={}[\]\\|:;"'<>,.?/~`]).{8,}$/;
+
+// const email = 'super_admin@test.com';
+// const password = 'Abcd123$';
 
 const Login = (props) => {
     const { setAuth } = useAuth();
     const navigate = useNavigate();
+
+    const [email, setEmail] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [validPwd, setValidPwd] = useState(true);
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd));
+    }, [pwd])
 
     const loginHandler = (e) => {
         e.preventDefault();
 
         const input = {
             email: email,
-            password: password
+            password: pwd
         }
 
         const headers = {
@@ -36,9 +47,36 @@ const Login = (props) => {
             });
     }
 
-    return(
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%'}}>
-            <Link to={{ }} onClick={loginHandler}>Login</Link>
+    return (
+        <div className="login-container">
+            <section>
+                <div className="login-page">
+                    <div className="form">
+                        <div className="login">
+                            <div className="login-header">
+                                <h3>LOGIN</h3>
+                                <p>Please enter your credentials to login.</p>
+                            </div>
+                        </div>
+                        <form className="login-form" onSubmit={loginHandler}>
+                            <input 
+                                type="text" 
+                                placeholder="email" 
+                                required 
+                                autoComplete="off" 
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <input 
+                                type="password" 
+                                placeholder="password" 
+                                required value={pwd} 
+                                onChange={(e) => setPwd(e.target.value)}
+                                />
+                            <button>login</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }
