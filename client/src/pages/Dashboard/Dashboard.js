@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useAxiosWithCredentials from "../../hooks/useAxiosWithCredentials";
 
 const Dashboard = (props) => {
+
+    console.log("Dashboard...");
+
     const [data, setData] = useState(null);
     const axiosWithCredentials = useAxiosWithCredentials();
     const navigate = useNavigate();
@@ -25,9 +28,9 @@ const Dashboard = (props) => {
         return () => {}
     }, []);
 
-    return (
-        <div>
-            <div>Dashboard</div>
+
+    return(
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%'}}>
             {data && <div>{data?.count}</div>}
         </div>
     );
