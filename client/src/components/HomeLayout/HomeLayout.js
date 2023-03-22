@@ -40,7 +40,7 @@ const HomeLayout = () => {
 
     return (
         <div>
-            <div>
+            <div style={{ position: 'sticky', top: 0, width: '100%'}}>
                 <ul className='top-nav'>
                     <Link to='main' className="logo">LITEON</Link>
                     <div>
@@ -49,7 +49,7 @@ const HomeLayout = () => {
                     </div>
                 </ul>
             </div>
-            <div>
+            <div className="main-container">
                 {outlet}
             </div>
         </div>
