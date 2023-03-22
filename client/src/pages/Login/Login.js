@@ -44,6 +44,7 @@ const Login = (props) => {
 
             }, (error) => {
                 console.log(error);
+                alert(error);
             });
     }
 
