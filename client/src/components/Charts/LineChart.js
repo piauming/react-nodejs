@@ -4,7 +4,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 
 const LineChart = ({ chartData }) => {
     return (
-        <div style={{ width: '100%', margin: 20}}>
+        <div style={{ width: 'calc(100%-20px)', margin: 20}}>
             <Line
                 data={chartData}
                 options={{ maintainAspectRatio: false }}

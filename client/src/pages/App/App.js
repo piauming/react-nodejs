@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addMessage } from "../../redux/actions";
-import { Home, Dashboard, Test, Notifications, Login } from '../../pages';
-import { AppLayout, HomeLayout, ProtectedRoute } from '../../components';
+import { AppLayout, HomeLayout, Main, Dashboard, Test, Notifications, Login, About } from '../../pages';
+import { ProtectedRoute } from '../../components';
 import './App.css';
 
 import io from 'socket.io-client';
@@ -26,12 +26,13 @@ const App = () => {
                 <Route index element={<Login />} />
                 <Route path="login" element={<Login />} />
                 <Route path="home" element={<ProtectedRoute><HomeLayout /></ProtectedRoute>}>
-                    <Route path="main" element={<Home />}>
+                    <Route path="main" element={<Main />}>
                         <Route path="dashboard" element={<Dashboard />} />
-                        <Route path="test" element={<Test />} />
+                        <Route path="about" element={<About />} />
                     </Route>
                     <Route path="notifications" element={<Notifications />} />
                 </Route>
+                <Route path="*" element={<Login />} />
             </Route>
         </Routes>
     );

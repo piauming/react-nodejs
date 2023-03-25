@@ -1,11 +1,11 @@
 import React from "react";
 
-const Missing = (props) => {
+function About() {
     return (
         <div className="container">
-            Missing
+            About
         </div>
     );
 }
 
-export default Missing;
+export default About;
