@@ -73,7 +73,7 @@ const Login = (props) => {
                             <input
                                 type="text"
                                 placeholder="email"
-                                // required
+                                required
                                 autoComplete="off"
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email}
@@ -81,7 +81,7 @@ const Login = (props) => {
                             <input
                                 type="password"
                                 placeholder="password"
-                                // required 
+                                required 
                                 value={pwd}
                                 onChange={(e) => setPwd(e.target.value)}
                             />
