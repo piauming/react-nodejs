@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useOutlet, useNavigate } from "react-router-dom";
 import useAxiosWithCredentials from "../../hooks/useAxiosWithCredentials";
-import useAuth from '../../hooks/useAuth'
+import useAuth from '../../hooks/useAuth';
 
 const Notification = () => {
     const messages = useSelector((state) => { return state.messages });
@@ -27,7 +27,7 @@ const HomeLayout = () => {
             await axiosWithCredentials.get('/logout');
             setAuth({});
             navigate("/login", { replace: true });
-        } catch  (err) {
+        } catch (err) {
             console.error(err);
         }
     }
@@ -40,17 +40,21 @@ const HomeLayout = () => {
 
     return (
         <div>
-            <div style={{ position: 'sticky', top: 0, width: '100%'}}>
+            <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 22, backgroundColor: 'ghostwhite' }}>
                 <ul className='top-nav'>
-                    <Link to='main' className="logo">LITEON</Link>
+                    <Link to='main' className="logo">Home</Link>
                     <div>
                         <Notification />
                         <Link to={{}} onClick={logoutHandler}>Logout</Link>
                     </div>
                 </ul>
             </div>
-            <div className="main-container">
-                {outlet}
+            <div style={{ marginTop: 60, width: '100%', overflowY: 'hidden' }}>
+                <div style={{ display: "flex", width: '100%', minHeight: 'calc(100vh - 60px)' }}>
+                    <div style={{ width: '100%' }}>
+                        {outlet}
+                    </div>
+                </div>
             </div>
         </div>
     );

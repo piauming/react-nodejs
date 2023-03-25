@@ -9,18 +9,21 @@ const Notifications = (props) => {
     const messages = useSelector((state) => { return state.messages });
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            {(messages.length == 0) && <NoMessage />}
-            
-            {(messages.length > 0) &&
-                <ul>{
-                    messages.map((m, index) =>
-                        <li key={index}>{m}</li>
-                    )
+     
+            <div className="container">
+                {(messages.length == 0) && <NoMessage />}
+
+                {(messages.length > 0) &&
+                    <ul>{
+                        messages.map((m, index) =>
+                            <li key={index}>{m}</li>
+                        )
+                    }
+                    </ul>
                 }
-                </ul>
-            }
-        </div>
+            </div>
+
+
     );
 }
 

@@ -4,7 +4,6 @@ import useAxiosWithCredentials from "../../hooks/useAxiosWithCredentials";
 import Select from 'react-select';
 import Helper from '../../utils/Helper';
 import { LineChart } from '../../components';
-import './Dashboard.css';
 
 const options = [
     { value: '7', label: 'Past 7 days' },
@@ -83,7 +82,7 @@ const Dashboard = (props) => {
             {/* Total Charged Energy=5988kWh
                 Total Revenue=SGD 4888
                 Total Charging Sessions=492 */}
-            <div style={{ width: 180, margin: 40, marginRight: 15, marginBottom: 0, alignSelf: 'end' }}>
+            <div style={{ width: 180, margin: 40, marginRight: 50, marginBottom: 0, alignSelf: 'end' }}>
                 <Select
                     defaultValue={selectedOption}
                     onChange={setSelectedOption}

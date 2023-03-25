@@ -40,7 +40,6 @@
   }
   
   .top-nav {
-    background-color: #e0e5ff;
     padding: 0;
     margin: 0;
     display: flex;
@@ -58,14 +57,4 @@
 
   .logo {
     font-weight: bolder;
-  }
-
-  .main-container {
-    position: absolute;
-    top: 60px;
-    left:0;
-    right:0;
-    bottom:0; 
-    width: 100%;
-    overflow-y: scroll;
   }
